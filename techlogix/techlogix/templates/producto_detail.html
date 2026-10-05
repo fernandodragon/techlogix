@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}{{ object.nombre }} · TechLogix S.A.{% endblock %}
+{% block content %}
+<h1>{{ object.nombre }}</h1>
+<dl class="detalle">
+  <dt>Categoría</dt><dd>{{ object.categoria }}</dd>
+  <dt>SKU</dt><dd class="mono">{{ object.sku }}</dd>
+  <dt>Precio</dt><dd>${{ object.precio|floatformat:0 }}</dd>
+  <dt>Stock</dt><dd>{{ object.stock }} unidades</dd>
+  <dt>Fecha de ingreso</dt><dd>{{ object.fecha_ingreso|date:"d/m/Y" }}</dd>
+</dl>
+<p class="acc">
+  <a href="{% url 'admin_panel' %}">← Volver</a>
+  {% if perms.inventario.change_producto %}<a href="{% url 'producto_editar' object.pk %}">Editar</a>{% endif %}
+  {% if perms.inventario.delete_producto %}<a class="danger" href="{% url 'producto_eliminar' object.pk %}">Eliminar</a>{% endif %}
+</p>
+{% endblock %}

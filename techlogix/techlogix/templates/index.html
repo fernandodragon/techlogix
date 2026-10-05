@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Inicio · TechLogix S.A.{% endblock %}
+{% block content %}
+<section class="hero">
+  <h1>Tecnología que mueve a tu empresa</h1>
+  <p>TechLogix S.A. es una distribuidora de tecnología: notebooks, periféricos, redes, almacenamiento y monitores para empresas y profesionales. Nuestro inventario está centralizado en una base de datos PostgreSQL para garantizar integridad y disponibilidad de la información.</p>
+  <p><a class="btn" href="{% url 'catalogo' %}">Ver catálogo público</a>
+     <a class="btn ghost" href="{% url 'login' %}">Acceso al área restringida</a></p>
+</section>
+<section class="cards">
+  <article><h3>Catálogo en línea</h3><p>Consulta productos, precios y stock, con búsqueda por nombre y filtro por categoría.</p></article>
+  <article><h3>Control de inventario</h3><p>El equipo autorizado gestiona productos desde un panel protegido con usuario y contraseña.</p></article>
+  <article><h3>Roles de acceso</h3><p>Administradores con acceso total; asistentes con permisos de solo lectura.</p></article>
+</section>
+{% endblock %}

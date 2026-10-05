@@ -1,0 +1,32 @@
+{% load static %}<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}TechLogix S.A.{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="{% url 'index' %}">Tech<b>Logix</b></a>
+  <nav>
+    <a href="{% url 'index' %}">Inicio</a>
+    <a href="{% url 'catalogo' %}">Catálogo</a>
+    {% if user.is_authenticated %}
+      <a href="{% url 'admin_panel' %}">Panel</a>
+      {% if user.is_staff %}<a href="{% url 'admin:index' %}">/admin</a>{% endif %}
+      <form method="post" action="{% url 'logout' %}" class="inline">{% csrf_token %}
+        <button class="link" type="submit">Salir ({{ user.username }})</button>
+      </form>
+    {% else %}
+      <a class="btn small" href="{% url 'login' %}">Área restringida</a>
+    {% endif %}
+  </nav>
+</header>
+<main>
+  {% for m in messages %}<p class="msg {{ m.tags }}">{{ m }}</p>{% endfor %}
+  {% block content %}{% endblock %}
+</main>
+<footer>© 2026 TechLogix S.A. — Distribuidora de tecnología</footer>
+</body>
+</html>

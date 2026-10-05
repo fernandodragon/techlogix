@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Catálogo · TechLogix S.A.{% endblock %}
+{% block content %}
+<h1>Catálogo de productos</h1>
+{% include "_filtros.html" %}
+<table>
+  <thead><tr><th>Producto</th><th>Categoría</th><th>SKU</th><th class="num">Precio</th><th class="num">Stock</th></tr></thead>
+  <tbody>
+  {% for p in productos %}
+    <tr><td>{{ p.nombre }}</td><td>{{ p.categoria }}</td><td class="mono">{{ p.sku }}</td>
+        <td class="num">${{ p.precio|floatformat:0 }}</td>
+        <td class="num">{% if p.stock > 0 %}{{ p.stock }}{% else %}<span class="out">Agotado</span>{% endif %}</td></tr>
+  {% empty %}<tr><td colspan="5">No se encontraron productos.</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% include "_paginacion.html" %}
+{% endblock %}

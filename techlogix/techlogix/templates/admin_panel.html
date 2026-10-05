@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Panel de gestión · TechLogix S.A.{% endblock %}
+{% block content %}
+<div class="head">
+  <h1>Gestión de productos</h1>
+  <span class="badge">{% if perms.inventario.add_producto %}Administrador{% else %}Asistente · solo lectura{% endif %}</span>
+</div>
+{% if perms.inventario.add_producto %}<p><a class="btn" href="{% url 'producto_crear' %}">+ Nuevo producto</a></p>{% endif %}
+{% include "_filtros.html" %}
+<table>
+  <thead><tr><th>Producto</th><th>Categoría</th><th>SKU</th><th class="num">Precio</th><th class="num">Stock</th><th>Ingreso</th><th>Acciones</th></tr></thead>
+  <tbody>
+  {% for p in productos %}
+    <tr><td>{{ p.nombre }}</td><td>{{ p.categoria }}</td><td class="mono">{{ p.sku }}</td>
+        <td class="num">${{ p.precio|floatformat:0 }}</td><td class="num">{{ p.stock }}</td><td>{{ p.fecha_ingreso|date:"d/m/Y" }}</td>
+        <td class="acc">
+          <a href="{% url 'producto_detalle' p.pk %}">Ver</a>
+          {% if perms.inventario.change_producto %}<a href="{% url 'producto_editar' p.pk %}">Editar</a>{% endif %}
+          {% if perms.inventario.delete_producto %}<a class="danger" href="{% url 'producto_eliminar' p.pk %}">Eliminar</a>{% endif %}
+        </td></tr>
+  {% empty %}<tr><td colspan="7">No hay productos.</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% include "_paginacion.html" %}
+{% endblock %}

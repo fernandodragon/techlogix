@@ -1,0 +1,8 @@
+<form method="get" action="" class="filtros">
+  <input type="search" name="q" value="{{ q }}" placeholder="Buscar por nombre…">
+  <select name="categoria">
+    <option value="">Todas las categorías</option>
+    {% for c in categorias %}<option value="{{ c.id }}" {% if categoria_sel == c.id|stringformat:"s" %}selected{% endif %}>{{ c.nombre }}</option>{% endfor %}
+  </select>
+  <button class="btn" type="submit">Filtrar</button>
+</form>

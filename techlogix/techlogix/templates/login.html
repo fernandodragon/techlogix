@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Ingresar · TechLogix S.A.{% endblock %}
+{% block content %}
+<section class="login">
+  <h1>Área restringida</h1>
+  <p>Ingresa con tu usuario y contraseña.</p>
+  {% if form.errors %}<p class="msg error">Usuario o contraseña incorrectos.</p>{% endif %}
+  {% if next %}<p class="msg info">Debes iniciar sesión para acceder a esa sección.</p>{% endif %}
+  <form method="post">
+    {% csrf_token %}
+    <label>Usuario {{ form.username }}</label>
+    <label>Contraseña {{ form.password }}</label>
+    <input type="hidden" name="next" value="{{ next }}">
+    <button class="btn" type="submit">Ingresar</button>
+  </form>
+</section>
+{% endblock %}
