@@ -1,0 +1,2 @@
+Administrador	Usuario: admin_tech	Contraseña: Admin_Tech_2026
+Asistente	Usuario: asistente_tech	Contraseña:Asist_Tech_2026
